@@ -43,4 +43,13 @@ public class RegisterService implements UserDetailsService {
     public Object getAllUsers() {
         return registerRepo.findAll();
     }
+
+	public void updateUser(Users user) {
+		
+		Users existingUser = registerRepo.findByEmail(user.getEmail())
+				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		existingUser.setName(user.getName());
+		existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+		registerRepo.save(existingUser);
+	}
 }
