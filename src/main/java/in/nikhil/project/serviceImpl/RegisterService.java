@@ -52,4 +52,9 @@ public class RegisterService implements UserDetailsService {
 		existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
 		registerRepo.save(existingUser);
 	}
+
+	public Users findByEmail(String loggedInEmail) {
+		return registerRepo.findByEmail(loggedInEmail)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+	}
 }
