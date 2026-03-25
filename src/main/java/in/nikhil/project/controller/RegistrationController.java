@@ -40,6 +40,9 @@ public class RegistrationController {
     
     @PutMapping("/update")
     public ResponseEntity<String> updateUser(@RequestBody Users user,Authentication authentication) {
+    	   String loggedInEmail = authentication.getName(); 
+    	    Users existingUser = userService.findByEmail(loggedInEmail);
+    	    user.setEmail(existingUser.getEmail());
 		if (!userService.existsByEmail(user.getEmail())) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
 		}
