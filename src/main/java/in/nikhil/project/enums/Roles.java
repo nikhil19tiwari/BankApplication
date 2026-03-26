@@ -1,4 +1,4 @@
-package in.nikhil.project.modal;
+package in.nikhil.project.enums;
 
 public enum Roles {
 admin, user
